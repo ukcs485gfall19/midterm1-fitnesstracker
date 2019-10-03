@@ -154,7 +154,7 @@ class CreateWorkoutTableViewController: UITableViewController {
     button.setTitle(buttonTitle, for: .normal)
     button.addTarget(self,
                      action: #selector(startStopButtonPressed),
-                     for: UIControlEvents.touchUpInside)
+                     for: UIControl.Event.touchUpInside)
     button.backgroundColor = buttonColor
     return button
   }
