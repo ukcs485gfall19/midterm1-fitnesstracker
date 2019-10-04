@@ -3,7 +3,6 @@
 import HealthKit
 
 class UserHealthProfile {
-  
   var age: Int?
   var biologicalSex: HKBiologicalSex?
   var bloodType: HKBloodType?
@@ -11,10 +10,11 @@ class UserHealthProfile {
   var weightInKilograms: Double?
   
   var bodyMassIndex: Double? {
-    
-    guard let weightInKilograms = weightInKilograms,
+    guard
+      let weightInKilograms = weightInKilograms,
       let heightInMeters = heightInMeters,
-      heightInMeters > 0 else {
+      heightInMeters > 0
+      else {
         return nil
     }
     

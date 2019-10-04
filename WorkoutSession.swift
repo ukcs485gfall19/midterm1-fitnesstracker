@@ -13,9 +13,9 @@ class WorkoutSession {
     private (set) var startDate: Date!
     private (set) var endDate: Date!
   
-    var state: WorkoutSessionState = .notStarted
+    
     var intervals: [OneHourWalkerInterval] = []
-
+    var state: WorkoutSessionState = .notStarted
   
   func start() {
     startDate = Date()

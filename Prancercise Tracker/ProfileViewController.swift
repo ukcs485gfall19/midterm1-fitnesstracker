@@ -1,19 +1,15 @@
-
-
 import UIKit
 import HealthKit
 
 class ProfileViewController: UITableViewController {
-    
   private enum ProfileSection: Int {
-    case ageSex
+    case ageSexBloodType
     case weightHeightBMI
     case readHealthKitData
     case saveBMI
   }
   
   private enum ProfileDataError: Error {
-    
     case missingBodyMassIndex
     
     var localizedDescription: String {
@@ -24,32 +20,33 @@ class ProfileViewController: UITableViewController {
     }
   }
   
-  @IBOutlet private var ageLabel:UILabel!
-  @IBOutlet private var biologicalSexLabel:UILabel!
-  @IBOutlet private var weightLabel:UILabel!
-  @IBOutlet private var heightLabel:UILabel!
-  @IBOutlet private var bodyMassIndexLabel:UILabel!
+  @IBOutlet private var ageLabel: UILabel!
+  @IBOutlet private var bloodTypeLabel: UILabel!
+  @IBOutlet private var biologicalSexLabel: UILabel!
+  @IBOutlet private var weightLabel: UILabel!
+  @IBOutlet private var heightLabel: UILabel!
+  @IBOutlet private var bodyMassIndexLabel: UILabel!
   
   private let userHealthProfile = UserHealthProfile()
   
   private func updateHealthInfo() {
-    loadAndDisplayAgeSex()
+    loadAndDisplayAgeSexAndBloodType()
     loadAndDisplayMostRecentWeight()
     loadAndDisplayMostRecentHeight()
   }
   
-  private func loadAndDisplayAgeSex() {
+  private func loadAndDisplayAgeSexAndBloodType() {
     do {
-      let userAgeSex = try ProfileDataStore.getAgeSex()
-      userHealthProfile.age = userAgeSex.age
-      userHealthProfile.biologicalSex = userAgeSex.biologicalSex
+      let userAgeSexAndBloodType = try ProfileDataStore.getAgeSexAndBloodType()
+      userHealthProfile.age = userAgeSexAndBloodType.age
+      userHealthProfile.biologicalSex = userAgeSexAndBloodType.biologicalSex
+      userHealthProfile.bloodType = userAgeSexAndBloodType.bloodType
       updateLabels()
     } catch let error {
-      self.displayAlert(for: error)
+      displayAlert(for: error)
     }
-
   }
-  
+    
   private func updateLabels() {
     if let age = userHealthProfile.age {
       ageLabel.text = "\(age)"
@@ -58,6 +55,10 @@ class ProfileViewController: UITableViewController {
     if let biologicalSex = userHealthProfile.biologicalSex {
       biologicalSexLabel.text = biologicalSex.stringRepresentation
     }
+    
+    if let bloodType = userHealthProfile.bloodType {
+         bloodTypeLabel.text = bloodType.stringRepresentation
+       }
 
     if let weight = userHealthProfile.weightInKilograms {
       let weightFormatter = MassFormatter()
@@ -127,6 +128,15 @@ class ProfileViewController: UITableViewController {
     }
 
   }
+    private func saveBodyMassIndexToHealthKit() {
+      guard let bodyMassIndex = userHealthProfile.bodyMassIndex else {
+        displayAlert(for: ProfileDataError.missingBodyMassIndex)
+        return
+      }
+      
+      ProfileDataStore.saveBodyMassIndexSample(bodyMassIndex: bodyMassIndex,
+                                               date: Date())
+    }
   
 
   
@@ -149,7 +159,9 @@ class ProfileViewController: UITableViewController {
       fatalError("A ProfileSection should map to the index path's section")
     }
     
-    switch section {
+   switch section {
+    case .saveBMI:
+      saveBodyMassIndexToHealthKit()
     case .readHealthKitData:
       updateHealthInfo()
     default: break

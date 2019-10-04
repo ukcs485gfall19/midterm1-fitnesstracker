@@ -2,6 +2,7 @@
 import UIKit
 import HealthKit
 
+
 class WorkoutsTableViewController: UITableViewController {
   
   private enum WorkoutsSegues: String {
@@ -11,7 +12,7 @@ class WorkoutsTableViewController: UITableViewController {
   
   private var workouts: [HKWorkout]?
   
-  private let prancerciseWorkoutCellID = "PrancerciseWorkoutCell"
+  private let OneHourWalkerCellID = "OneHourWalkerCell"
   
   lazy var dateFormatter:DateFormatter = {
     let formatter = DateFormatter()
@@ -31,15 +32,16 @@ class WorkoutsTableViewController: UITableViewController {
   }
   
   func reloadWorkouts() {
-    WorkoutDataStore.loadWorkouts { (workouts, error) in
-      self.workouts = workouts
-      self.tableView.reloadData()
-    }
+        WorkoutDataStore.loadWorkouts { (workouts, error) in
+            self.workouts = workouts
+            self.tableView.reloadData()
+        }
 
-  }
+  
   
 }
-// MARK: - UITableViewDataSource
+}
+
 extension WorkoutsTableViewController {
   override func tableView(_ tableView: UITableView,
                           numberOfRowsInSection section: Int) -> Int {
@@ -56,13 +58,24 @@ extension WorkoutsTableViewController {
         
       //1. Get a cell to display the workout in
       let cell = tableView.dequeueReusableCell(withIdentifier:
-        prancerciseWorkoutCellID, for: indexPath)
+        OneHourWalkerCellID, for: indexPath)
         
       //2. Get the workout corresponding to this row
       let workout = workouts[indexPath.row]
         
       //3. Show the workout's start date in the label
       cell.textLabel?.text = dateFormatter.string(from: workout.startDate)
+    
+    if let caloriesBurned =
+         workout.totalEnergyBurned?.doubleValue(for: .kilocalorie()) {
+         let formattedCalories = String(format: "CaloriesBurned: %.2f",
+                                        caloriesBurned)
+         
+         cell.detailTextLabel?.text = formattedCalories
+       } else {
+         cell.detailTextLabel?.text = nil
+       }
+       
         
       return cell
     }

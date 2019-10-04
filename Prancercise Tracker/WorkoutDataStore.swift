@@ -2,51 +2,69 @@
 
 import HealthKit
 
+
 class WorkoutDataStore {
   
-    @available(iOS 12.0, *)
+   
     class func save(OneHourWalker: OneHourWalker,
                   completion: @escaping ((Bool, Error?) -> Swift.Void)) {
     let healthStore = HKHealthStore()
     let workoutConfiguration = HKWorkoutConfiguration()
     workoutConfiguration.activityType = .other
-    
-   
-        let builder = HKWorkoutBuilder(healthStore: healthStore,
+    let builder = HKWorkoutBuilder(healthStore: healthStore,
                                        configuration: workoutConfiguration,
                                        device: .local())
     
-        
-        builder.beginCollection(withStart: OneHourWalker.start) { (success, error) in
+    builder.beginCollection(withStart: OneHourWalker.start) { (success, error) in
       guard success else {
         completion(false, error)
         return
       }
     }
-
-  
-    
-        
-    
-   
-       
-    
-    
+        let samples = self.samples(for: OneHourWalker)
           
-      //2. Finish collection workout data and set the workout end date
-      builder.endCollection(withEnd: OneHourWalker.end) { (success, error) in
-        guard success else {
-          completion(false, error)
-          return
-        }
+          builder.add(samples) { (success, error) in
+            guard success else {
+              completion(false, error)
+              return
+            }
             
-        //3. Create the workout with the samples added
-        builder.finishWorkout { (_, error) in
-          let success = error == nil
-          completion(success, error)
-        }
-      }
+            builder.endCollection(withEnd: OneHourWalker.end) { (success, error) in
+              guard success else {
+                completion(false, error)
+                return
+              }
+              
+              builder.finishWorkout { (workout, error) in
+                let success = error == nil
+                completion(success, error)
+              }
+            }
+          }
     }
+        
+        private class func samples(for workout: OneHourWalker) -> [HKSample] {
+          //1. Verify that the energy quantity type is still available to HealthKit.
+          guard let energyQuantityType = HKSampleType.quantityType(
+            forIdentifier: .activeEnergyBurned) else {
+                fatalError("*** Energy Burned Type Not Available ***")
+          }
+        
+    let samples: [HKSample] = workout.intervals.map { interval in
+        let calorieQuantity = HKQuantity(unit: .kilocalorie(),
+                                         doubleValue: interval.totalEnergyBurned)
+        
+        return HKCumulativeQuantitySeriesSample(type: energyQuantityType,
+                                                      quantity: calorieQuantity,
+                                                      start: interval.start,
+                                                      end: interval.end)
+      }
+      
+      return samples
+    }
+
+    
+    
 
     
     class func loadWorkouts(completion:
