@@ -1,6 +1,7 @@
 
 import UIKit
 
+@available(iOS 12.0, *)
 class CreateWorkoutTableViewController: UITableViewController {
   
   @IBOutlet private var startTimeLabel: UILabel!
@@ -104,15 +105,15 @@ class CreateWorkoutTableViewController: UITableViewController {
     switch session.state {
       
     case .active:
-      buttonTitle = "STOP PRANCERCISING"
+      buttonTitle = "STOP EXERCISE"
       buttonColor = #colorLiteral(red: 0.9254902005, green: 0.2352941185, blue: 0.1019607857, alpha: 1)
       
     case .notStarted:
-      buttonTitle = "START PRANCERCISING!"
+      buttonTitle = "START EXERCISE!"
       buttonColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
       
     case .finished:
-      buttonTitle = "NEW PRANCERCISE"
+      buttonTitle = "NEW EXERCISE"
       buttonColor = #colorLiteral(red: 0.3411764801, green: 0.6235294342, blue: 0.1686274558, alpha: 1)
       
     }
@@ -171,7 +172,7 @@ class CreateWorkoutTableViewController: UITableViewController {
       fatalError("Shouldn't be able to press the done button without a saved workout.")
     }
     
-    WorkoutDataStore.save(prancerciseWorkout: currentWorkout) { (success, error) in
+    WorkoutDataStore.save(OneHourWalker: currentWorkout) { (success, error) in
       
       if success {
         self.dismissAndRefreshWorkouts()
