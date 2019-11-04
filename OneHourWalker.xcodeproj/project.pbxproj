@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		2FAEE13C2347089200230CDB /* HKBloodType+StringRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAEE13B2347089200230CDB /* HKBloodType+StringRepresentation.swift */; };
-		2FD13116234676EA00B37692 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2FD13115234676EA00B37692 /* HealthKit.framework */; };
 		9F270C321EBE47EB0075412F /* WorkoutSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F270C311EBE47EB0075412F /* WorkoutSession.swift */; };
 		AC891D731EDDBDC500A0F84A /* WorkoutDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC891D721EDDBDC500A0F84A /* WorkoutDataStore.swift */; };
 		AC8EABE61EAEA833002DD041 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AC8EABE51EAEA833002DD041 /* Assets.xcassets */; };
@@ -52,7 +51,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2FD13116234676EA00B37692 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -117,9 +115,9 @@
 		AC8EABDB1EAE88DB002DD041 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				ACF4F91F1EB0FFED0031154C /* UserHealthProfile.swift */,
 				AC8EAC071EAEA8E5002DD041 /* Workout.swift */,
 				9F270C311EBE47EB0075412F /* WorkoutSession.swift */,
-				ACF4F91F1EB0FFED0031154C /* UserHealthProfile.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -352,6 +350,7 @@
 		AC1BA51F1EAE5D2F00C99FE3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_ENTITLEMENTS = OneHourWalker.entitlements;
 				DEVELOPMENT_TEAM = BH9BS3QV7C;
 				INFOPLIST_FILE = "Prancercise Tracker/Info.plist";
@@ -359,7 +358,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = edu.uky.Phillip.OneHourWalker;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.uky.phillip.Midterm1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 5.0;
@@ -369,6 +368,7 @@
 		AC1BA5201EAE5D2F00C99FE3 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_ALLOW_ENTITLEMENTS_MODIFICATION = YES;
 				CODE_SIGN_ENTITLEMENTS = OneHourWalker.entitlements;
 				DEVELOPMENT_TEAM = 64852YB4P7;
 				INFOPLIST_FILE = "Prancercise Tracker/Info.plist";

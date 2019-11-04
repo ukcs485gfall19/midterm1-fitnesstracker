@@ -152,7 +152,8 @@ class CreateWorkoutTableViewController: UITableViewController {
   
   private func dismissAndRefreshWorkouts() {
     session.clear()
-    dismiss(animated: true, completion: nil)
+    //This is causing an issue when finishing a run
+    self.dismiss(animated: true, completion: nil)
   }
   
   private func displayStartWorkoutAlert() {
