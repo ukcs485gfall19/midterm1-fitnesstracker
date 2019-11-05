@@ -153,8 +153,11 @@ class CreateWorkoutTableViewController: UITableViewController {
   private func dismissAndRefreshWorkouts() {
     session.clear()
     //This is causing an issue when finishing a run
+    DispatchQueue.main.sync {
     self.dismiss(animated: true, completion: nil)
   }
+    }
+    
   
   private func displayStartWorkoutAlert() {
     let alert = UIAlertController(title: nil,

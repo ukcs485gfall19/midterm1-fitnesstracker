@@ -57,7 +57,7 @@ extension WorkoutsTableViewController {
       }
         
       //1. Get a cell to display the workout in
-      let cell = tableView.dequeueReusableCell(withIdentifier: OneHourWalkerCellID, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: OneHourWalkerCellID, for: indexPath)
         
       //2. Get the workout corresponding to this row
       let workout = workouts[indexPath.row]
