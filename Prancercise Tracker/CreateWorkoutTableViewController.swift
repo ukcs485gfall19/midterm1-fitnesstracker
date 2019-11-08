@@ -1,11 +1,23 @@
 
 import UIKit
+import MapKit
+import CoreLocation
 
 class CreateWorkoutTableViewController: UITableViewController {
   @IBOutlet private var startTimeLabel: UILabel!
   @IBOutlet private var durationLabel: UILabel!
+    
   
-  private var timer: Timer!
+    @IBOutlet weak var mapContainerView: UIView!
+    @IBOutlet weak var MapView: MKMapView!
+    
+   private var run: Run?
+   private let locationManager = LocationManager.shared
+   private var seconds = 0
+   private var timer: Timer?
+   private var distance = Measurement(value: 0, unit: UnitLength.meters)
+   private var locationList: [CLLocation] = []
+  private var polyline: MKPolyline?
   
   var session = WorkoutSession()
   
@@ -112,8 +124,14 @@ class CreateWorkoutTableViewController: UITableViewController {
   func beginWorkout() {
     session.start()
     updateLabels()
+    mapContainerView.isHidden = false
     updateOKButtonStatus()
     tableView.reloadData()
+    MapView.removeOverlays(MapView.overlays)
+    seconds = 0
+    distance = Measurement(value: 0, unit: UnitLength.meters)
+    locationList.removeAll()
+    startLocationUpdates()
   }
   
   func finishWorkout() {
@@ -131,6 +149,13 @@ class CreateWorkoutTableViewController: UITableViewController {
       finishWorkout()
     }
   }
+    
+    private func startLocationUpdates() {
+      locationManager.delegate = self as CLLocationManagerDelegate
+      locationManager.activityType = .fitness
+      locationManager.distanceFilter = 10
+      locationManager.startUpdatingLocation()
+    }
   
   @IBAction func cancelButtonPressed(sender: Any) {
     dismiss(animated: true, completion: nil)
@@ -185,5 +210,41 @@ class CreateWorkoutTableViewController: UITableViewController {
                                    handler: nil)
     alert.addAction(okayAction)
     present(alert, animated: true, completion: nil)
+  }
+}
+
+
+extension CreateWorkoutTableViewController: CLLocationManagerDelegate {
+  
+  func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+    for newLocation in locations {
+      let howRecent = newLocation.timestamp.timeIntervalSinceNow
+      guard newLocation.horizontalAccuracy < 20 && abs(howRecent) < 10 else { continue }
+      
+      if let lastLocation = locationList.last {
+        let delta = newLocation.distance(from: lastLocation)
+        distance = distance + Measurement(value: delta, unit: UnitLength.meters)
+        let coordinates = [lastLocation.coordinate, newLocation.coordinate]
+        MapView.addOverlay(MKPolyline(coordinates: coordinates, count: 2))
+        let region = MKCoordinateRegion.init(center: newLocation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+        MapView.setRegion(region, animated: true)
+      }
+      
+      locationList.append(newLocation)
+    }
+  }
+}
+
+// MARK: - Map View Delegate
+
+extension CreateWorkoutTableViewController: MKMapViewDelegate {
+    private func MapView(_ MapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    guard let polyline = overlay as? MKPolyline else {
+      return MKOverlayRenderer(overlay: overlay)
+    }
+    let renderer = MKPolylineRenderer(polyline: polyline)
+    renderer.strokeColor = .blue
+    renderer.lineWidth = 3
+    return renderer
   }
 }

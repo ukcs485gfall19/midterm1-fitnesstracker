@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F9159F5237359ED00343BE2 /* MulticolorPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9159F4237359ED00343BE2 /* MulticolorPolyline.swift */; };
+		2F9159F823735C4100343BE2 /* OneHourWalker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 2F9159F623735C4100343BE2 /* OneHourWalker.xcdatamodeld */; };
+		2F9159FA2373732B00343BE2 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9159F92373732B00343BE2 /* CoreDataStack.swift */; };
+		2F9159FE2374FA9400343BE2 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9159FD2374FA9400343BE2 /* LocationManager.swift */; };
 		2FAEE13C2347089200230CDB /* HKBloodType+StringRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FAEE13B2347089200230CDB /* HKBloodType+StringRepresentation.swift */; };
 		9F270C321EBE47EB0075412F /* WorkoutSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F270C311EBE47EB0075412F /* WorkoutSession.swift */; };
 		AC891D731EDDBDC500A0F84A /* WorkoutDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC891D721EDDBDC500A0F84A /* WorkoutDataStore.swift */; };
@@ -25,6 +29,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F9159F4237359ED00343BE2 /* MulticolorPolyline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticolorPolyline.swift; sourceTree = "<group>"; };
+		2F9159F723735C4100343BE2 /* FitnessTracker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FitnessTracker.xcdatamodel; sourceTree = "<group>"; };
+		2F9159F92373732B00343BE2 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		2F9159FD2374FA9400343BE2 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		2FAEE13B2347089200230CDB /* HKBloodType+StringRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HKBloodType+StringRepresentation.swift"; sourceTree = SOURCE_ROOT; };
 		2FD13113234676EA00B37692 /* OneHourWalker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneHourWalker.entitlements; sourceTree = SOURCE_ROOT; };
 		2FD13115234676EA00B37692 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
@@ -68,6 +76,9 @@
 		AC1BA5031EAE5D2F00C99FE3 = {
 			isa = PBXGroup;
 			children = (
+				2F9159F92373732B00343BE2 /* CoreDataStack.swift */,
+				2F9159F623735C4100343BE2 /* OneHourWalker.xcdatamodeld */,
+				2F9159F4237359ED00343BE2 /* MulticolorPolyline.swift */,
 				AC1BA50E1EAE5D2F00C99FE3 /* OneHourWalker */,
 				AC1BA50D1EAE5D2F00C99FE3 /* Products */,
 				2FD13114234676EA00B37692 /* Frameworks */,
@@ -118,6 +129,7 @@
 				ACF4F91F1EB0FFED0031154C /* UserHealthProfile.swift */,
 				AC8EAC071EAEA8E5002DD041 /* Workout.swift */,
 				9F270C311EBE47EB0075412F /* WorkoutSession.swift */,
+				2F9159FD2374FA9400343BE2 /* LocationManager.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -211,8 +223,12 @@
 				ACF4F9201EB0FFED0031154C /* UserHealthProfile.swift in Sources */,
 				AC8EABE81EAEA83F002DD041 /* AppDelegate.swift in Sources */,
 				AC891D731EDDBDC500A0F84A /* WorkoutDataStore.swift in Sources */,
+				2F9159FE2374FA9400343BE2 /* LocationManager.swift in Sources */,
 				AC8EABEE1EAEA855002DD041 /* MasterViewController.swift in Sources */,
 				AC8EABEF1EAEA855002DD041 /* ProfileViewController.swift in Sources */,
+				2F9159F823735C4100343BE2 /* OneHourWalker.xcdatamodeld in Sources */,
+				2F9159FA2373732B00343BE2 /* CoreDataStack.swift in Sources */,
+				2F9159F5237359ED00343BE2 /* MulticolorPolyline.swift in Sources */,
 				2FAEE13C2347089200230CDB /* HKBloodType+StringRepresentation.swift in Sources */,
 				AC8EAC081EAEA8E5002DD041 /* Workout.swift in Sources */,
 				AC8EABF91EAEA895002DD041 /* HKBiologicalSex+StringRepresentation.swift in Sources */,
@@ -405,6 +421,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		2F9159F623735C4100343BE2 /* OneHourWalker.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				2F9159F723735C4100343BE2 /* FitnessTracker.xcdatamodel */,
+			);
+			currentVersion = 2F9159F723735C4100343BE2 /* FitnessTracker.xcdatamodel */;
+			path = OneHourWalker.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = AC1BA5041EAE5D2F00C99FE3 /* Project object */;
 }
