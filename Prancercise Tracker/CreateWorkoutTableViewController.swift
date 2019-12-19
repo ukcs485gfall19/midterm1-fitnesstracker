@@ -261,7 +261,7 @@ extension CreateWorkoutTableViewController: CLLocationManagerDelegate {
 // MARK: - Map View Delegate
 
 extension CreateWorkoutTableViewController: MKMapViewDelegate {
-    private func MapView(_ MapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+    func mapView(_ MapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
     guard let polyline = overlay as? MKPolyline else {
       return MKOverlayRenderer(overlay: overlay)
     }
