@@ -5,13 +5,9 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Fitness Tracker</string>
+	<string>Prancercise</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
-	<key>CFBundleIcons</key>
-	<dict/>
-	<key>CFBundleIcons~ipad</key>
-	<dict/>
 	<key>CFBundleIdentifier</key>
 	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -27,11 +23,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSHealthShareUsageDescription</key>
-	<string>We will share your data with other apps for better health accuracy</string>
+	<string>We will share your prancercise data with other apps for better health accuracy</string>
 	<key>NSHealthUpdateUsageDescription</key>
 	<string>We will use your health information to track your Prancercise workouts better</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Fitness Tracker needs access to your location in order to record and track your run!</string>
+	<string>OneHourWalker needs access to your location in order to record and track your run!</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

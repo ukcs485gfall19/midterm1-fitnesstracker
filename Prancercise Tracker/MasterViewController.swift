@@ -2,6 +2,8 @@
 import UIKit
 
 class MasterViewController: UITableViewController {
+    
+  
   private let authorizeHealthKitSection = 2
   
   private func authorizeHealthKit() {
@@ -14,15 +16,15 @@ class MasterViewController: UITableViewController {
           print(baseMessage)
         }
         return
-      }
+        }
       
       print("HealthKit Successfully Authorized.")
     }
   }
+ 
   
   // MARK: - UITableView Delegate
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
     if indexPath.section == authorizeHealthKitSection {
       authorizeHealthKit()
     }

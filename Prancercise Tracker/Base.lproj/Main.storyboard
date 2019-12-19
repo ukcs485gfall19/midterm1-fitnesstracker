@@ -111,7 +111,7 @@
                             <outlet property="delegate" destination="pGg-6v-bdr" id="Y6K-Cp-Qkv"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="OneHourWalker" id="tQt-TN-PWz">
+                    <navigationItem key="navigationItem" title="Fitness Tracker " id="tQt-TN-PWz">
                         <barButtonItem key="backBarButtonItem" title=" " id="v8b-vV-piw"/>
                     </navigationItem>
                 </tableViewController>
@@ -122,7 +122,7 @@
         <!--Profile-->
         <scene sceneID="yW2-54-FD7">
             <objects>
-                <tableViewController title="Profile &amp; BMI" id="O9A-PM-bbK" userLabel="Profile" customClass="ProfileViewController" customModule="OneHourWalker" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController title="User Profile" id="O9A-PM-bbK" userLabel="Profile" customClass="ProfileViewController" customModule="OneHourWalker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="EIl-zo-cjM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -336,7 +336,7 @@
                             <rect key="frame" x="0.0" y="108" width="375" height="400"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pDm-dQ-fin">
+                                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" pitchEnabled="NO" showsBuildings="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pDm-dQ-fin">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="400"/>
                                 </mapView>
                             </subviews>

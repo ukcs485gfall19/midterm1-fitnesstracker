@@ -4,7 +4,7 @@ import HealthKit
 
 
 class WorkoutsTableViewController: UITableViewController {
-  
+
   private enum WorkoutsSegues: String {
     case showCreateWorkout
     case finishedCreatingWorkout

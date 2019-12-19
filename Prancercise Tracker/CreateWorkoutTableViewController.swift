@@ -122,6 +122,7 @@ class CreateWorkoutTableViewController: UITableViewController {
   }
   
   func beginWorkout() {
+    
     session.start()
     updateLabels()
     mapContainerView.isHidden = false
@@ -132,6 +133,7 @@ class CreateWorkoutTableViewController: UITableViewController {
     distance = Measurement(value: 0, unit: UnitLength.meters)
     locationList.removeAll()
     startLocationUpdates()
+    
   }
   
   func finishWorkout() {
@@ -139,6 +141,7 @@ class CreateWorkoutTableViewController: UITableViewController {
     updateLabels()
     updateOKButtonStatus()
     tableView.reloadData()
+    locationManager.stopUpdatingLocation()
   }
   
   @objc func startStopButtonPressed() {
@@ -151,7 +154,7 @@ class CreateWorkoutTableViewController: UITableViewController {
   }
     
     private func startLocationUpdates() {
-      locationManager.delegate = self as CLLocationManagerDelegate
+      locationManager.delegate = self
       locationManager.activityType = .fitness
       locationManager.distanceFilter = 10
       locationManager.startUpdatingLocation()
@@ -211,9 +214,12 @@ class CreateWorkoutTableViewController: UITableViewController {
     alert.addAction(okayAction)
     present(alert, animated: true, completion: nil)
   }
+    
 }
 
 
+
+// MARK: - Location Manager Delegate
 extension CreateWorkoutTableViewController: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
