@@ -41,7 +41,7 @@ class CreateWorkoutTableViewController: UITableViewController {
     
     navigationItem.rightBarButtonItem?.isEnabled = isEnabled
   }
-  
+      
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     session.clear()
