@@ -9,6 +9,7 @@ class WorkoutDataStore {
     class func save(OneHourWalker: OneHourWalker,
                   completion: @escaping ((Bool, Error?) -> Swift.Void)) {
     let healthStore = HKHealthStore()
+        
     let workoutConfiguration = HKWorkoutConfiguration()
     workoutConfiguration.activityType = .other
     let builder = HKWorkoutBuilder(healthStore: healthStore,
@@ -21,6 +22,7 @@ class WorkoutDataStore {
         return
       }
     }
+    
         let samples = self.samples(for: OneHourWalker)
           
           builder.add(samples) { (success, error) in
@@ -42,6 +44,7 @@ class WorkoutDataStore {
             }
           }
     }
+    
         
         private class func samples(for workout: OneHourWalker) -> [HKSample] {
           //1. Verify that the energy quantity type is still available to HealthKit.

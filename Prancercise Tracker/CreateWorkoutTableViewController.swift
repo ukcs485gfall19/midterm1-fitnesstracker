@@ -2,6 +2,7 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Firebase
 
 class CreateWorkoutTableViewController: UITableViewController {
   @IBOutlet private var startTimeLabel: UILabel!
@@ -142,6 +143,7 @@ class CreateWorkoutTableViewController: UITableViewController {
     updateOKButtonStatus()
     tableView.reloadData()
     locationManager.stopUpdatingLocation()
+    sendtoFireStore()
   }
   
   @objc func startStopButtonPressed() {
@@ -172,6 +174,7 @@ class CreateWorkoutTableViewController: UITableViewController {
     WorkoutDataStore.save(OneHourWalker: currentWorkout) { (success, error) in
       if success {
         self.dismissAndRefreshWorkouts()
+        
       } else {
         self.displayProblemSavingWorkoutAlert()
       }
@@ -185,6 +188,19 @@ class CreateWorkoutTableViewController: UITableViewController {
     self.dismiss(animated: true, completion: nil)
   }
     }
+    
+    private func sendtoFireStore() {
+        let db = Firestore.firestore()
+        var lats = [Double]()
+        var longs = [Double]()
+        for location in locationList {
+            lats.append(location.coordinate.latitude)
+            longs.append(location.coordinate.longitude)
+            
+        }
+        db.collection("Locations").document().setData(["longitude":longs, "latitude":lats])
+    }
+    
     
   
   private func displayStartWorkoutAlert() {
