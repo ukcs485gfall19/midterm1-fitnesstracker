@@ -7,6 +7,7 @@ import Firebase
 class CreateWorkoutTableViewController: UITableViewController {
   @IBOutlet private var startTimeLabel: UILabel!
   @IBOutlet private var durationLabel: UILabel!
+  @IBOutlet private var DistanceLabel: UILabel!
     
   
     @IBOutlet weak var mapContainerView: UIView!
@@ -16,7 +17,7 @@ class CreateWorkoutTableViewController: UITableViewController {
    private let locationManager = LocationManager.shared
    private var seconds = 0
    private var timer: Timer?
-   private var distance = Measurement(value: 0, unit: UnitLength.meters)
+   private var distance = Measurement(value: 0, unit: UnitLength.feet)
    private var locationList: [CLLocation] = []
   private var polyline: MKPolyline?
   
@@ -68,10 +69,13 @@ class CreateWorkoutTableViewController: UITableViewController {
       startTimeLabel.text = startTimeFormatter.string(from: session.startDate)
       let duration = Date().timeIntervalSince(session.startDate)
       durationLabel.text = durationFormatter.string(from: duration)
+      DistanceLabel.text =  FormatDisplay.distance(distance)
+
     case .finished:
       startTimeLabel.text = startTimeFormatter.string(from: session.startDate)
       let duration = session.endDate.timeIntervalSince(session.startDate)
       durationLabel.text = durationFormatter.string(from: duration)
+        DistanceLabel.text =  FormatDisplay.distance(distance)
     default:
       startTimeLabel.text = nil
       durationLabel.text = nil
@@ -82,7 +86,7 @@ class CreateWorkoutTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch session.state {
     case .active, .finished:
-      return 2
+      return 3
     case .notStarted:
       return 0
     }
@@ -131,7 +135,7 @@ class CreateWorkoutTableViewController: UITableViewController {
     tableView.reloadData()
     MapView.removeOverlays(MapView.overlays)
     seconds = 0
-    distance = Measurement(value: 0, unit: UnitLength.meters)
+    distance = Measurement(value: 0, unit: UnitLength.miles)
     locationList.removeAll()
     startLocationUpdates()
     
@@ -246,11 +250,12 @@ extension CreateWorkoutTableViewController: CLLocationManagerDelegate {
       
       if let lastLocation = locationList.last {
         let delta = newLocation.distance(from: lastLocation)
-        distance = distance + Measurement(value: delta, unit: UnitLength.meters)
+        distance = distance + Measurement(value: delta, unit: UnitLength.feet)
         let coordinates = [lastLocation.coordinate, newLocation.coordinate]
         MapView.addOverlay(MKPolyline(coordinates: coordinates, count: 2))
         let region = MKCoordinateRegion.init(center: newLocation.coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
         MapView.setRegion(region, animated: true)
+        
       }
       
       locationList.append(newLocation)
