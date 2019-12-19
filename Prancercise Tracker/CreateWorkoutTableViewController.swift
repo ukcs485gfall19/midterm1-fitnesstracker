@@ -176,6 +176,7 @@ class CreateWorkoutTableViewController: UITableViewController {
         self.displayProblemSavingWorkoutAlert()
       }
     }
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "loadWorkouts"), object: nil)
   }
   
   private func dismissAndRefreshWorkouts() {

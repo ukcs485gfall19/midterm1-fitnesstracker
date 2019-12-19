@@ -24,6 +24,8 @@ class WorkoutsTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.clearsSelectionOnViewWillAppear = false
+    NotificationCenter.default.addObserver(self, selector: #selector(WorkoutsTableViewController.reloadWorkouts), name: Notification.Name(rawValue: "loadWorkouts"), object: nil)
+    tableView.dataSource = self
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -31,10 +33,15 @@ class WorkoutsTableViewController: UITableViewController {
     reloadWorkouts()
   }
   
-  func reloadWorkouts() {
-        WorkoutDataStore.loadWorkouts { (workouts, error) in
-            self.workouts = workouts
-            self.tableView.reloadData()
+    @objc func reloadWorkouts() {
+        DispatchQueue.main.async {
+            WorkoutDataStore.loadWorkouts { (workouts, error) in
+                self.workouts = workouts
+                self.tableView.reloadData()
+                self.tableView.beginUpdates()
+                self.tableView.endUpdates()
+            }
+            
         }
 
   

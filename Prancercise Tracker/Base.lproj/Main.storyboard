@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rS3-R9-Ivy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15702" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="rS3-R9-Ivy">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15704"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -315,7 +315,7 @@
                     <navigationItem key="navigationItem" title="Workouts" id="k82-iG-bPt">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Q7A-RE-lIv">
                             <connections>
-                                <segue destination="AGg-o6-Okw" kind="presentation" id="cub-6f-iDm"/>
+                                <segue destination="AGg-o6-Okw" kind="presentation" modalPresentationStyle="fullScreen" id="cub-6f-iDm"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -329,7 +329,7 @@
             <objects>
                 <tableViewController title="Add Workout" id="3MW-Zo-Js0" userLabel="Add Workout View Controller" customClass="CreateWorkoutTableViewController" customModule="OneHourWalker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="static" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="tka-Jb-sTn">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="amX-gI-rv5" userLabel="Map Container View">
@@ -445,8 +445,9 @@
         <scene sceneID="v3b-xd-Jry">
             <objects>
                 <navigationController id="AGg-o6-Okw" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="s00-l2-O7p"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eeC-Do-Xxc">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
